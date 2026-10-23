@@ -1,0 +1,32 @@
+<%- include('partials/head') %>
+<main id="main">
+  <%- include('partials/crumbs') %>
+  <section class="page-hero" style="padding-bottom:20px">
+    <div class="wrap">
+      <span class="eyebrow">Service areas</span>
+      <h1 class="h1">From Eastham to Duxbury.</h1>
+      <p class="lede">Headquartered in Bourne, Travers Group serves 18 towns across Cape Cod and the South Shore with tree service, patios & walkways, retaining walls, demolition and firewood delivery.</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:40px">
+    <div class="wrap">
+      <% ['Upper Cape', 'Mid Cape', 'Lower Cape', 'Outer Cape', 'South Shore'].forEach(r => { const list_ = towns.filter(t => t.region === r); if (!list_.length) return; %>
+      <h2 class="region-label"><%= r === 'South Shore' ? 'South Shore & Plymouth County' : r %></h2>
+      <div class="grid-3 reveal">
+        <% list_.forEach(t => { %>
+        <div class="card bordered">
+          <h3><a href="<%= townUrl(t) %>" style="color:inherit"><%= t.name %>, MA</a></h3>
+          <p><%= t.villages.slice(0, 4).join(' · ') %></p>
+          <p style="font-size:14px;line-height:1.9">
+            <% services.forEach(s => { %><a href="<%= stUrl(s, t) %>"><%= s.short %></a> &nbsp;<% }) %>
+          </p>
+          <a class="more chev" href="<%= townUrl(t) %>" style="display:inline-block;margin-top:10px;font-size:15px">All <%= t.name %> services</a>
+        </div>
+        <% }) %>
+      </div>
+      <% }) %>
+    </div>
+  </section>
+  <%- include('partials/cta', { ctaTitle: 'Don’t see your town? Ask us.', ctaText: 'Call or send your project details and we’ll let you know if we can help.' }) %>
+</main>
+<%- include('partials/footer') %>

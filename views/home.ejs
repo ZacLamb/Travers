@@ -1,0 +1,111 @@
+<%- include('partials/head') %>
+<main id="main">
+  <section class="hero on-dark">
+    <div class="hero-media"><img src="<%= img(siteImg.homeHero, 1800) %>" srcset="<%= srcset(siteImg.homeHero) %>" sizes="100vw" alt="Custom stone patio built by Travers Group on Cape Cod" fetchpriority="high"></div>
+    <div class="wrap">
+      <span class="eyebrow">Family-owned · <%= biz.years %> years · <%= biz.region %></span>
+      <h1 class="display">Outdoor spaces, engineered to last.</h1>
+      <p class="lede">Tree service, patios & walkways, retaining walls, demolition and seasoned firewood — built by one family-owned crew, from <%= biz.coverage %>.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/contact">Get a free estimate</a>
+        <a class="btn btn-ghost" href="<%= biz.phoneHref %>">Call <%= biz.phone %></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="specs reveal">
+        <div class="spec"><b><%= biz.years %></b><span>Years in business</span></div>
+        <div class="spec"><b><%= biz.clients %></b><span>Happy clients</span></div>
+        <div class="spec"><b>1</b><span>Family, owner-run</span></div>
+        <div class="spec"><b>18</b><span>Towns served</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:40px">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow">What we build</span>
+        <h2 class="h2">Every service. One trusted crew.</h2>
+        <p class="lede">Landscape construction and tree work for homeowners across Cape Cod and the South Shore.</p>
+      </div>
+      <div class="tiles mt-l">
+        <% services.forEach((s, i) => { %>
+        <a class="tile reveal <%= i === 0 ? 'wide dark' : '' %> <%= i === 3 ? 'dark' : '' %>" href="<%= svcUrl(s) %>">
+          <div class="tile-copy">
+            <h3><%= s.name %></h3>
+            <p><%= s.cardLine %></p>
+            <div class="links-row"><span class="chev">Learn more</span></div>
+          </div>
+          <div class="tile-img"><img src="<%= img(s.card, 1200) %>" srcset="<%= srcset(s.card) %>" sizes="(max-width: 860px) 100vw, <%= i === 0 ? '100vw' : '50vw' %>" loading="lazy" decoding="async" alt="<%= s.name %> project by Travers Group, Cape Cod MA"></div>
+        </a>
+        <% }) %>
+        <a class="tile wide reveal" href="/service-areas" style="justify-content:center;min-height:auto">
+          <div class="tile-copy">
+            <h3>Eastham to Duxbury.</h3>
+            <p>18 towns across Cape Cod and the South Shore.</p>
+            <div class="links-row"><span class="chev">Find your town</span></div>
+          </div>
+          <div class="tile-copy" style="padding-top:0">
+            <div class="chips" style="justify-content:center">
+              <% towns.slice(0, 10).forEach(t => { %><span class="chip"><%= t.name %></span><% }) %>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="feature">
+        <div class="feature-media reveal"><img src="<%= img(siteImg.why, 1200) %>" srcset="<%= srcset(siteImg.why) %>" sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" decoding="async" alt="Retaining wall and landscape construction by Travers Group"></div>
+        <div class="feature-copy reveal">
+          <span class="eyebrow">Why Travers</span>
+          <h2 class="h2" style="margin-top:14px">Built right. The first time.</h2>
+          <p>We’re committed to top-quality outdoor construction and real customer care — every job, every time. Whether it’s expert tree work, a new patio, a structural retaining wall or a safe teardown, our team has you covered from <%= biz.coverage %>.</p>
+          <div class="links-row mt"><a class="chev" href="/about">Our story</a><a class="chev" href="/contact">Get an estimate</a></div>
+        </div>
+      </div>
+      <ul class="spec-list mt-xl reveal">
+        <li><b>Skilled professionals</b><span>A certified crew with years of hands-on experience delivers reliable, high-caliber workmanship on every project.</span></li>
+        <li><b>Tailored solutions</b><span>We plan each project around your vision, your property and your budget — never a one-size-fits-all template.</span></li>
+        <li><b>Quality materials & equipment</b><span>The right stone, block and machinery for long-lasting results.</span></li>
+        <li><b>Prompt, dependable service</b><span>Clear communication and on-time delivery from first consultation to final cleanup.</span></li>
+        <li><b>Local expertise</b><span>A trusted name across the South Shore and Cape — we know this region’s soils, storms and slopes.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <%- include('partials/process') %>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Recent work</span>
+        <h2 class="h2">The proof is in the stonework.</h2>
+      </div>
+      <div class="mt-l reveal">
+        <%- include('partials/gallery', { items: [services[1].gallery[0], services[2].gallery[2], services[0].gallery[0], services[1].gallery[3], services[2].gallery[5], services[3].gallery[0], services[1].gallery[6], services[2].gallery[7], services[0].gallery[1]], alt: 'Patio, retaining wall and tree work on Cape Cod' }) %>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Service areas</span>
+        <h2 class="h2">Local to Cape Cod & the South Shore.</h2>
+        <p class="lede">Based on Cranberry Highway in Bourne, we work in every town from Eastham to Duxbury.</p>
+      </div>
+      <div class="town-grid mt-l reveal">
+        <% towns.forEach(t => { %><a href="<%= townUrl(t) %>"><%= t.name %>, MA</a><% }) %>
+      </div>
+    </div>
+  </section>
+
+  <%- include('partials/cta') %>
+</main>
+<%- include('partials/footer') %>

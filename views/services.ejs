@@ -1,0 +1,29 @@
+<%- include('partials/head') %>
+<main id="main">
+  <%- include('partials/crumbs') %>
+  <section class="page-hero" style="padding-bottom:20px">
+    <div class="wrap">
+      <span class="eyebrow">Services</span>
+      <h1 class="h1">Tree work, hardscaping, demolition & firewood.</h1>
+      <p class="lede">Five core services, one family-owned crew — serving Cape Cod and the South Shore from <%= biz.coverage %>.</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:60px">
+    <div class="wrap">
+      <% services.forEach((s, i) => { %>
+      <div class="feature <%= i % 2 ? 'flip' : '' %>">
+        <div class="feature-media reveal"><img src="<%= img(s.card, 1200) %>" srcset="<%= srcset(s.card) %>" sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" decoding="async" alt="<%= s.name %> by Travers Group"></div>
+        <div class="feature-copy reveal">
+          <span class="eyebrow"><%= s.short %></span>
+          <h2 class="h2" style="margin-top:14px"><a href="<%= svcUrl(s) %>" style="color:inherit"><%= s.name %></a></h2>
+          <p><%= s.tagline %> <%= s.subservices.map(x => x.name).join(' · ') %>.</p>
+          <div class="links-row mt"><a class="chev" href="<%= svcUrl(s) %>">Learn more</a><a class="chev" href="/contact">Get an estimate</a></div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </section>
+  <%- include('partials/process') %>
+  <%- include('partials/cta') %>
+</main>
+<%- include('partials/footer') %>

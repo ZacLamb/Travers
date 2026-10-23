@@ -1,0 +1,11 @@
+<section class="cta on-dark blueprint">
+  <div class="wrap">
+    <span class="eyebrow">Free estimates</span>
+    <h2 class="h2"><%= typeof ctaTitle !== 'undefined' && ctaTitle ? ctaTitle : 'Let’s build something that lasts.' %></h2>
+    <p class="lede"><%= typeof ctaText !== 'undefined' && ctaText ? ctaText : `Tell us about your project and we’ll come out, walk the property and give you a clear, honest estimate.` %></p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="/contact">Request a free estimate</a>
+      <a class="btn btn-ghost" href="<%= biz.phoneHref %>">Call <%= biz.phone %></a>
+    </div>
+  </div>
+</section>

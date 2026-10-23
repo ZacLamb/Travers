@@ -1,0 +1,44 @@
+<%- include('partials/head') %>
+<main id="main">
+  <%- include('partials/crumbs') %>
+  <section class="page-hero" style="padding-bottom:10px">
+    <div class="wrap">
+      <span class="eyebrow">Free estimates</span>
+      <h1 class="h1">Let’s talk about your project.</h1>
+      <p class="lede">Tell us what you have in mind — tree work, a patio, a retaining wall, demolition or firewood — and we’ll get back to you quickly.</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:60px">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <div class="card alt" style="background:var(--bg-alt)">
+          <dl style="margin:0">
+            <dt>Phone</dt><dd><a class="phone-big" href="<%= biz.phoneHref %>"><%= biz.phone %></a></dd>
+            <dt>Email</dt><dd><a href="mailto:<%= biz.email %>"><%= biz.email %></a></dd>
+            <dt>Address</dt><dd><%= biz.street %><br><%= biz.city %>, <%= biz.state %> <%= biz.zip %></dd>
+            <dt>Service area</dt><dd style="margin-bottom:0">Cape Cod & the South Shore — <%= biz.coverage %></dd>
+          </dl>
+        </div>
+        <div class="card" style="background:var(--dark);color:var(--on-dark)">
+          <h3>Storm damage?</h3>
+          <p style="color:var(--on-dark-2)">For emergency tree removal, call us directly — don’t wait on a form.</p>
+          <a class="btn btn-primary mt" href="<%= biz.phoneHref %>">Call <%= biz.phone %></a>
+        </div>
+        <div class="map mt">
+          <iframe title="Map to Travers Group, 152 Cranberry Highway, Bourne MA" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=<%= encodeURIComponent(biz.street + ', ' + biz.city + ', ' + biz.state + ' ' + biz.zip) %>&z=13&output=embed"></iframe>
+        </div>
+      </div>
+      <div class="form-shell">
+        <iframe src="https://api.leadconnectorhq.com/widget/form/<%= biz.ghlFormId %>" id="inline-<%= biz.ghlFormId %>" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-activation-type="alwaysActivated" data-deactivation-type="neverDeactivate" data-form-name="Contact Us" data-form-id="<%= biz.ghlFormId %>" title="Request a free estimate"></iframe>
+        <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
+      </div>
+    </div>
+  </section>
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Services</span><h2 class="h2">What can we help with?</h2></div>
+      <div class="mt-l reveal"><%- include('partials/service-links') %></div>
+    </div>
+  </section>
+</main>
+<%- include('partials/footer') %>

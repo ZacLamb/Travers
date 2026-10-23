@@ -1,0 +1,55 @@
+<%- include('partials/head') %>
+<main id="main">
+  <%- include('partials/crumbs') %>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow"><%= town.region %> · <%= town.name %>, MA</span>
+      <h1 class="h1"><%= c.h1 %></h1>
+      <p class="lede">Tree service, patios & walkways, retaining walls, demolition and firewood delivery for <%= town.name %><%= town.alias ? ' and ' + town.alias : '' %> homeowners — from a family-owned crew with <%= biz.years %> years on the Cape and South Shore.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/contact">Get a free estimate</a>
+        <a class="btn btn-ghost" href="<%= biz.phoneHref %>">Call <%= biz.phone %></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="narrow prose reveal">
+      <p><strong>Serving <%= town.name %>, Massachusetts.</strong> <%= town.note %></p>
+      <% if (town.villages.length) { %><p>We work throughout <%= town.name %>, including <%= list(town.villages) %>. Whether you need a hazardous tree removed, a new paver patio, a retaining wall to stop erosion, an old shed or garage torn down, or a load of seasoned firewood for the winter, one call to Travers Group covers it.</p><% } %>
+    </div>
+  </section>
+
+  <section class="section alt" style="padding-top:80px">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Services</span><h2 class="h2">What we do in <%= town.name %>.</h2></div>
+      <div class="mt-l reveal"><%- include('partials/service-links', { town }) %></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="specs reveal">
+        <div class="spec"><b><%= biz.years %></b><span>Years in business</span></div>
+        <div class="spec"><b><%= biz.clients %></b><span>Happy clients</span></div>
+        <div class="spec"><b>5</b><span>Core services</span></div>
+        <div class="spec"><b>1</b><span>Family, owner-run</span></div>
+      </div>
+    </div>
+  </section>
+
+  <%- include('partials/process') %>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Nearby towns</span><h2 class="h2">Also serving towns near <%= town.name %>.</h2></div>
+      <div class="chips mt-l reveal">
+        <% nearby.forEach(t => { %><a class="chip" href="<%= townUrl(t) %>"><%= t.name %>, MA</a><% }) %>
+        <a class="chip home" href="/service-areas">All service areas ›</a>
+      </div>
+    </div>
+  </section>
+
+  <%- include('partials/cta', { ctaTitle: 'Your ' + town.name + ' project starts here.' }) %>
+</main>
+<%- include('partials/footer') %>

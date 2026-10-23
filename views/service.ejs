@@ -1,0 +1,121 @@
+<%- include('partials/head') %>
+<div class="subnav"><div class="wrap">
+  <strong><%= service.name %></strong>
+  <a class="link" href="#overview">Overview</a>
+  <a class="link" href="#gallery">Gallery</a>
+  <a class="link" href="#areas">Areas</a>
+  <a class="link" href="#faq">FAQ</a>
+  <a class="btn btn-primary" href="/contact">Free estimate</a>
+</div></div>
+<main id="main">
+  <%- include('partials/crumbs') %>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow"><%= service.eyebrow %> · Cape Cod & South Shore</span>
+      <h1 class="h1"><%= service.h1 %></h1>
+      <p class="lede"><%= service.tagline %></p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/contact">Get a free estimate</a>
+        <a class="btn btn-ghost" href="<%= biz.phoneHref %>">Call <%= biz.phone %></a>
+      </div>
+    </div>
+    <div class="page-hero-media"><img src="<%= img(service.hero, 1800) %>" srcset="<%= srcset(service.hero) %>" sizes="100vw" alt="<%= service.name %> by Travers Group on Cape Cod, MA" fetchpriority="high"></div>
+  </section>
+
+  <section class="section" id="overview">
+    <div class="narrow prose reveal">
+      <p><strong><%= service.name %> from <%= biz.coverage %>.</strong> <%= service.intro %></p>
+    </div>
+    <div class="wrap mt-xl">
+      <div class="grid-4 reveal">
+        <% service.subservices.forEach((x, i) => { %>
+        <div class="card bordered"><span class="num">0<%= i + 1 %></span><h3><%= x.name %></h3><p><%= x.text %></p></div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <% service.features.forEach((f, i) => { %>
+      <div class="feature <%= i % 2 ? 'flip' : '' %>">
+        <div class="feature-media reveal"><img src="<%= img(f.img, 1200) %>" srcset="<%= srcset(f.img) %>" sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" decoding="async" alt="<%= f.title %>"></div>
+        <div class="feature-copy reveal">
+          <span class="eyebrow"><%= service.short %></span>
+          <h2 class="h3"><%= f.title %></h2>
+          <p><%= f.text %></p>
+          <div class="links-row mt"><a class="chev" href="/contact">Request an estimate</a><a class="chev" href="#gallery">See the work</a></div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Why choose us</span>
+        <h2 class="h2">Why homeowners choose Travers for <%= service.name.toLowerCase() %>.</h2>
+      </div>
+      <ul class="spec-list mt-l reveal">
+        <% service.why.forEach(w => { %><li><b><%= w.t %></b><span><%= w.d %></span></li><% }) %>
+      </ul>
+    </div>
+  </section>
+
+  <%- include('partials/process') %>
+
+  <section class="section" id="gallery">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Project gallery</span>
+        <h2 class="h2">Recent <%= service.name.toLowerCase() %> projects.</h2>
+      </div>
+      <div class="mt-l reveal"><%- include('partials/gallery', { items: service.gallery, alt: service.name }) %></div>
+    </div>
+  </section>
+
+  <section class="section alt" id="areas">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Service areas</span>
+        <h2 class="h2"><%= service.name %> near you.</h2>
+        <p class="lede">We provide <%= service.name.toLowerCase() %> in every town from <%= biz.coverage %>. Choose your town for local details.</p>
+      </div>
+      <div class="town-grid mt-l reveal">
+        <% towns.forEach(t => { %><a href="<%= stUrl(service, t) %>"><%= service.short %> in <%= t.name %></a><% }) %>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="narrow">
+      <div class="reveal"><span class="eyebrow">FAQ</span><h2 class="h2" style="margin-top:14px"><%= service.name %> questions, answered.</h2></div>
+      <div class="mt-l reveal"><%- include('partials/faq', { faqs: service.faqs }) %></div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">More services</span><h2 class="h2">Often paired with <%= service.name.toLowerCase() %>.</h2></div>
+      <div class="grid-3 mt-l reveal">
+        <% service.related.map(r => services.find(s => s.slug === r)).forEach(s => { %>
+        <a class="card-img card-link" href="<%= svcUrl(s) %>">
+          <img src="<%= img(s.card, 800) %>" loading="lazy" decoding="async" alt="<%= s.name %> on Cape Cod">
+          <div class="card-body"><h3 style="font-size:21px"><%= s.name %></h3><p class="muted mt-s" style="font-size:15px"><%= s.cardLine %></p><span class="more chev">Learn more</span></div>
+        </a>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json"><%- JSON.stringify({
+    '@context': 'https://schema.org', '@type': 'Service', serviceType: service.name, name: service.title,
+    description: service.metaDescription, url: SITE_URL + svcUrl(service),
+    provider: { '@id': SITE_URL + '/#business' },
+    areaServed: towns.map(t => ({ '@type': 'City', name: t.name + ', MA' })),
+    image: img(service.hero, 1200),
+  }) %></script>
+  <%- include('partials/cta', { ctaTitle: 'Ready to start your ' + service.name.toLowerCase() + ' project?' }) %>
+</main>
+<%- include('partials/footer') %>

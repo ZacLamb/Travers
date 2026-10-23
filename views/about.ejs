@@ -1,0 +1,58 @@
+<%- include('partials/head') %>
+<main id="main">
+  <%- include('partials/crumbs') %>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">About Travers Group</span>
+      <h1 class="h1">Dedicated to building your family’s future.</h1>
+      <p class="lede">Our mission is simple: reliable landscape construction that lets you and your loved ones enjoy your property today — and be ready for tomorrow.</p>
+    </div>
+    <div class="page-hero-media"><img src="<%= img(siteImg.about1, 1800) %>" srcset="<%= srcset(siteImg.about1) %>" sizes="100vw" alt="The Travers Group crew at work" fetchpriority="high"></div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="specs reveal">
+        <div class="spec"><b><%= biz.years %></b><span>Years serving the community</span></div>
+        <div class="spec"><b><%= biz.clients %></b><span>Happy clients</span></div>
+        <div class="spec"><b>1</b><span>Family, multi-generation</span></div>
+        <div class="spec"><b>18</b><span>Towns served</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:20px">
+    <div class="narrow prose reveal">
+      <h2 class="h2" style="margin-bottom:28px">From humble beginnings to local leadership.</h2>
+      <p>For more than 40 years, <strong>Mike and his family</strong> have proudly served the community, transforming ordinary outdoor spaces into beautiful, functional landscapes. What began as a small, local operation has grown into a trusted, multi-generational business that remains deeply committed to quality workmanship and personal service. Rooted in strong family values, our team treats every property as if it were our own.</p>
+      <p>Over the decades we’ve built lasting relationships with our clients based on honesty, expertise and reliability. From tree work to complex patio and retaining wall installations, our experienced crew handles each job with the same attention to detail and professionalism. We keep refining our techniques and investing in top-of-the-line equipment to deliver results that exceed expectations.</p>
+      <p>At the heart of our company is a passion for creating outdoor living spaces that enrich lives and strengthen communities. Whether we’re restoring a beloved family yard or taking on a major commercial project, our promise stays the same: exceptional service, clients treated like neighbors, and landscapes built to stand the test of time.</p>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="feature">
+        <div class="feature-media reveal"><img src="<%= img(siteImg.about2, 1200) %>" srcset="<%= srcset(siteImg.about2) %>" sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" decoding="async" alt="Hardscape project completed by Travers Group"></div>
+        <div class="feature-copy reveal">
+          <span class="eyebrow">What we do</span>
+          <h2 class="h3">One crew for the whole outdoor project.</h2>
+          <p>Because we handle tree work, demolition, retaining walls and patios in-house, we can take a property from overgrown and unusable to finished and beautiful — without juggling multiple contractors.</p>
+          <div class="links-row mt">
+            <% services.forEach(s => { %><a class="chev" href="<%= svcUrl(s) %>"><%= s.name %></a><% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Where we work</span><h2 class="h2">Proudly local, Eastham to Duxbury.</h2></div>
+      <div class="town-grid mt-l reveal"><% towns.forEach(t => { %><a href="<%= townUrl(t) %>"><%= t.name %>, MA</a><% }) %></div>
+    </div>
+  </section>
+
+  <%- include('partials/cta', { ctaTitle: 'Work with a family that’s been here for 40+ years.' }) %>
+</main>
+<%- include('partials/footer') %>

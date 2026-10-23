@@ -1,0 +1,48 @@
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="/"><svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="15" width="10" height="7" rx="1.2" fill="#1d1d1f"/><rect x="13" y="15" width="10" height="7" rx="1.2" fill="#1d1d1f"/><rect x="6" y="7" width="12" height="7" rx="1.2" fill="#b5551b"/><path d="M12 1.5 18.5 6h-13z" fill="#1d1d1f"/></svg><span>TRAVERS <small>GROUP</small></span></a>
+        <p>Family-owned landscape construction serving <%= biz.region %> for <%= biz.years %> years — <%= biz.coverage %>.</p>
+        <p><a class="phone" href="<%= biz.phoneHref %>"><%= biz.phone %></a><br>
+        <a href="mailto:<%= biz.email %>"><%= biz.email %></a><br>
+        <%= biz.street %>, <%= biz.city %>, <%= biz.state %> <%= biz.zip %></p>
+        <p><a href="<%= biz.facebook %>" rel="noopener" target="_blank">Facebook</a> · <a href="<%= biz.yelp %>" rel="noopener" target="_blank">Yelp</a></p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul><% services.forEach(s => { %><li><a href="<%= svcUrl(s) %>"><%= s.name %></a></li><% }) %></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/service-areas">Service Areas</a></li>
+          <li><a href="/contact">Free Estimate</a></li>
+          <li><a href="/services">All Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Towns We Serve</h4>
+        <ul class="footer-towns"><% towns.forEach(t => { %><li><a href="<%= townUrl(t) %>"><%= t.name %>, MA</a></li><% }) %></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <%= year %> <%= biz.legalName %>. All rights reserved.</span>
+      <span>Tree Service · Patios & Walkways · Retaining Walls · Demolition · Firewood</span>
+    </div>
+  </div>
+</footer>
+<nav class="callbar" aria-label="Quick contact">
+  <a href="<%= biz.phoneHref %>">Call Now</a>
+  <a href="/contact">Free Estimate</a>
+</nav>
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-close" aria-label="Close">×</button>
+  <button class="lb-prev" aria-label="Previous">‹</button>
+  <img alt="">
+  <button class="lb-next" aria-label="Next">›</button>
+</div>
+<script src="/js/site.js?v=1" defer></script>
+</body>
+</html>
