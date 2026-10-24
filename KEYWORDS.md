@@ -14,7 +14,7 @@ The rebuild fixes all of that and competes with the directories on their own str
 | Retaining Walls | /services/retaining-walls | retaining wall contractor | stone retaining wall, block retaining wall, erosion control, retaining wall installation |
 | Demolition | /services/demolition | demolition contractor Cape Cod | shed removal, garage demolition, deck removal, debris removal, site preparation |
 | Firewood | /services/firewood-delivery | firewood delivery Cape Cod | seasoned firewood for sale, firewood near me, firewood for wood stove |
-| Demolition sub-pages (6) | /services/demolition/{slug} | shed removal, garage demolition, deck removal, light commercial demolition, debris removal, site preparation | + Cape Cod / South Shore |
+| Demolition sub-pages (8) | /services/demolition/{slug} | house demolition, interior demolition, shed removal, garage demolition, deck removal, light commercial demolition, debris removal, site preparation | + Cape Cod / South Shore |
 | Town hubs (18) | /service-areas/{town}-ma | {town} MA tree service / landscaping contractor | all 5 services + town |
 | Service × town (90) | /services/{service}/{town}-ma | {service keyword} {town} MA | villages (e.g. Hyannis, Osterville, Manomet) |
 

@@ -23,9 +23,9 @@ const PHRASES = {
   },
   demolition: {
     h1: (t) => `Demolition services in ${t.name}, MA`,
-    title: (t) => `Demolition Contractor ${t.name} MA | Shed, Garage & Deck Removal | Travers Group`,
-    meta: (t) => `Safe residential and light commercial demolition in ${t.name}, MA — sheds, garages, decks and additions — with debris removal and site prep. Free estimates: ${biz.phone}.`,
-    lead: (t) => `Tearing down an old shed, garage, deck or addition in ${t.name}? Our crew handles demolition from start to finish — teardown, debris hauling and site cleanup — so your next project can start on a clean slate.`,
+    title: (t) => `Demolition Contractor ${t.name} MA | House, Interior, Shed & Garage Demo | Travers Group`,
+    meta: (t) => `House demolition, interior demolition, and shed, garage and deck removal in ${t.name}, MA — with debris removal and site prep. Free estimates: ${biz.phone}.`,
+    lead: (t) => `Tearing down an old house, gutting an interior, or removing a shed, garage or deck in ${t.name}? Our crew handles demolition from start to finish — teardown, debris hauling and site cleanup — so your next project can start on a clean slate.`,
   },
   'firewood-delivery': {
     h1: (t) => `Firewood delivery in ${t.name}, MA`,

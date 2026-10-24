@@ -2,6 +2,48 @@
 // Copy is limited to what Travers Group offers (residential + light commercial demo, debris removal, site prep).
 module.exports = [
   {
+    slug: 'house-demolition',
+    name: 'House Demolition',
+    keyword: 'house demolition',
+    title: 'House Demolition & Teardowns | Cape Cod & South Shore | Travers Group',
+    meta: 'Whole-house demolition and teardowns on Cape Cod and the South Shore — cottages and homes taken down safely, debris hauled and the lot prepped to rebuild. Call (508) 888-9432.',
+    h1: 'House demolition & teardowns.',
+    tagline: 'Taking down the old house so your new one can go up — safely, cleanly and on schedule.',
+    img: 'g:67d097f8e1f641371dea52fe.png',
+    body: [
+      'Cape Cod and the South Shore are full of tired cottages and outdated homes on great lots. When renovating doesn’t make sense, a full teardown clears the way for the house you actually want. We take homes down in a controlled sequence with the right equipment, protecting the trees, neighbors and utilities you need to keep.',
+      'Once the structure is down, we haul the debris and prep the lot so your builder can start. Because we also handle tree work, retaining walls and patios, we can stay on the project long after demolition day.',
+    ],
+    points: ['Cottages and single-family homes', 'Controlled, equipment-based teardown', 'Debris loaded and hauled', 'Lot cleared and prepped to rebuild'],
+    faqs: [
+      { q: 'What permits are needed to demolish a house in Massachusetts?', a: 'Whole-house demolition typically involves a demolition permit from your town, utility disconnections and, in many cases, asbestos inspection and state notification before work begins. We’ll walk you through what your project requires during the estimate.' },
+      { q: 'How long does a house demolition take?', a: 'The teardown itself is often fast; most of the timeline is permits, utility shutoffs and pre-demolition requirements. You’ll get a clear schedule with your estimate.' },
+      { q: 'Can you prep the lot for my builder?', a: 'Yes. After demolition we clear and grade the site so your builder can start right away.' },
+    ],
+    related: ['interior-demolition', 'site-preparation', 'debris-removal'],
+  },
+  {
+    slug: 'interior-demolition',
+    name: 'Interior Demolition',
+    keyword: 'interior demolition',
+    title: 'Interior Demolition & Gut-Outs | Cape Cod & South Shore | Travers Group',
+    meta: 'Interior demolition and gut-outs for renovations on Cape Cod and the South Shore — kitchens, baths, walls and flooring removed cleanly, debris hauled away. Call (508) 888-9432.',
+    h1: 'Interior demolition & gut-outs.',
+    tagline: 'Clean, controlled tear-outs that get your renovation started on the right foot.',
+    img: 'g:67d097f8e235454a573eecd0.png',
+    body: [
+      'Every renovation starts with taking something out. We handle interior demolition for kitchens, bathrooms, walls, ceilings and flooring — removing what needs to go while protecting what stays.',
+      'Debris is carried out and hauled away the same way it is on our exterior jobs, so your contractor walks into a clean, open space ready for the next phase.',
+    ],
+    points: ['Kitchens and bathrooms', 'Walls, ceilings and flooring', 'Full gut-outs for renovations', 'Debris carried out and hauled'],
+    faqs: [
+      { q: 'Do you protect the rest of the house during interior demolition?', a: 'Yes. We plan the work to protect the areas, finishes and structure that are staying, and keep the work area as contained as possible.' },
+      { q: 'Can you remove load-bearing walls?', a: 'Structural changes need to be planned with your builder or engineer and permitted by your town. Tell us about your project and we’ll talk through how it fits.' },
+      { q: 'Do I need a permit for interior demolition?', a: 'Many interior demolition projects are covered under the renovation permit your contractor pulls. We’ll go over what applies to your job during the estimate.' },
+    ],
+    related: ['house-demolition', 'debris-removal', 'light-commercial-demolition'],
+  },
+  {
     slug: 'shed-removal',
     name: 'Shed Removal',
     keyword: 'shed removal',

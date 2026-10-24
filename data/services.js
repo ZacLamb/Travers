@@ -182,7 +182,7 @@ module.exports = [
     keyword: 'demolition contractor',
     title: 'Demolition Contractor | Residential & Light Commercial Demo, Cape Cod',
     metaDescription:
-      'Safe residential and light commercial demolition — sheds, garages, decks, additions and small structures — with full debris removal and site prep. Serving Cape Cod and the South Shore.',
+      'House demolition, interior demolition, and shed, garage and deck removal — with full debris removal and site prep. Residential and light commercial demolition across Cape Cod and the South Shore.',
     h1: 'Demolition that clears the way.',
     eyebrow: 'Demolition',
     tagline: 'Safe, efficient teardown and cleanup — so your next project starts on a clean slate.',
@@ -190,9 +190,9 @@ module.exports = [
     hero: 'f:678007ac639dd2095e631432.jpeg',
     card: 'f:67d0651c3cba9e73bf8c7c73.jpeg',
     intro:
-      'When it’s time to remove an old structure or prep a site for something new, you need a crew that puts precision and safety first. We handle residential and light commercial demolition from start to finish — teardown with the right equipment, debris hauling and site cleanup — so you can move straight into building. Sheds, garages, decks, additions, outbuildings and old hardscapes are all part of a normal week for us.',
+      'When it’s time to remove an old structure or prep a site for something new, you need a crew that puts precision and safety first. We handle house, interior, residential and light commercial demolition from start to finish — teardown with the right equipment, debris hauling and site cleanup — so you can move straight into building. Whole houses, interiors, sheds, garages, decks, additions and old hardscapes are all part of a normal week for us.',
     subservices: [
-      { name: 'Residential Demolition', text: 'Sheds, garages, decks, additions, porches and outbuildings removed safely and cleanly.' },
+      { name: 'Residential Demolition', text: 'Houses, interiors, sheds, garages, decks, additions and porches removed safely and cleanly.' },
       { name: 'Light Commercial Demo', text: 'Small-scale commercial teardown and interior/exterior structure removal.' },
       { name: 'Debris Removal & Hauling', text: 'All demolition debris loaded and hauled away — no dumpster headaches for you.' },
       { name: 'Site Preparation', text: 'Grading and clearing so your lot is ready for the next build, patio or landscape.' },
@@ -217,7 +217,7 @@ module.exports = [
       { t: 'On time, every time', d: 'We keep your project on schedule so your builder can start on day one.' },
     ],
     faqs: [
-      { q: 'What kinds of structures do you demolish?', a: 'Sheds, detached garages, decks, porches, additions, outbuildings, old patios and walls, plus light commercial structures. Call us to describe your project and we’ll let you know if it fits.' },
+      { q: 'What kinds of structures do you demolish?', a: 'Whole houses and cottages, interior gut-outs, sheds, detached garages, decks, porches, additions, outbuildings, old patios and walls, plus light commercial structures. Call us to describe your project and we’ll let you know if it fits.' },
       { q: 'Do you haul away the debris?', a: 'Yes. Debris removal and site cleanup are part of our demolition service, so you are left with a clear, ready-to-work site.' },
       { q: 'Do I need a permit to demolish a shed or garage?', a: 'Many Massachusetts towns require a demolition permit from the local building department, and utilities must be disconnected first. We’ll go over what your project needs during the estimate.' },
       { q: 'Can you prep the site for a new patio or addition after demo?', a: 'Yes — that’s one of our specialties. Because we also build patios, walkways and retaining walls, we can take a site from teardown straight through to finished hardscape.' },
