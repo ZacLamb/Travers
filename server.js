@@ -5,6 +5,7 @@ const compression = require('compression');
 const biz = require('./data/business');
 const services = require('./data/services');
 const towns = require('./data/towns');
+const demoPages = require('./data/demolition');
 const images = require('./data/images');
 const { serviceTown, townHub, list } = require('./data/compose');
 
@@ -28,10 +29,11 @@ app.use((req, res, next) => {
 const svcUrl = (s) => `/services/${s.slug}`;
 const townUrl = (t) => `/service-areas/${t.slug}`;
 const stUrl = (s, t) => `/services/${s.slug}/${t.slug}`;
+const demoUrl = (d) => `/services/demolition/${d.slug}`;
 
 app.locals = Object.assign(app.locals, {
   biz, services, towns, img: images.src, srcset: images.srcset, siteImg: images.site,
-  svcUrl, townUrl, stUrl, list, SITE_URL, year: new Date().getFullYear(),
+  svcUrl, townUrl, stUrl, demoUrl, demoPages, list, SITE_URL, year: new Date().getFullYear(),
 });
 
 function render(res, view, data) {
@@ -62,6 +64,18 @@ app.get('/services/:slug', (req, res, next) => {
 app.get('/services/:slug/:town', (req, res, next) => {
   const service = services.find((s) => s.slug === req.params.slug);
   const town = towns.find((t) => t.slug === req.params.town);
+  if (service && service.slug === 'demolition' && !town) {
+    const page = demoPages.find((d) => d.slug === req.params.town);
+    if (!page) return next();
+    return render(res, 'demo-sub', {
+      service, page, title: page.title, description: page.meta, ogImage: page.img,
+      breadcrumbs: [
+        { name: 'Services', url: '/services' },
+        { name: service.name, url: svcUrl(service) },
+        { name: page.name, url: demoUrl(page) },
+      ],
+    });
+  }
   if (!service || !town) return next();
   const c = serviceTown(service, town, towns);
   render(res, 'service-town', {
@@ -120,6 +134,7 @@ app.get('/robots.txt', (req, res) => {
 app.get('/sitemap.xml', (req, res) => {
   const urls = ['/', '/services', '/service-areas', '/about', '/contact'];
   services.forEach((s) => urls.push(svcUrl(s)));
+  demoPages.forEach((d) => urls.push(demoUrl(d)));
   towns.forEach((t) => urls.push(townUrl(t)));
   services.forEach((s) => towns.forEach((t) => urls.push(stUrl(s, t))));
   const today = new Date().toISOString().slice(0, 10);

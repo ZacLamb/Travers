@@ -35,7 +35,15 @@
     </div>
   </section>
 
-  <section class="section alt">
+  <% if (service.slug === 'demolition') { %>
+  <section class="section alt" id="demo-services">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Demolition services</span><h2 class="h2">What we tear down<%= false ? ' in ' + town.name : '' %>.</h2><p class="lede">Every demolition job includes debris removal and cleanup.</p></div>
+      <div class="mt-l reveal"><%- include('partials/demo-links') %></div>
+    </div>
+  </section>
+  <% } %>
+  <section class="section">
     <div class="wrap">
       <% service.features.forEach((f, i) => { %>
       <div class="feature <%= i % 2 ? 'flip' : '' %>">

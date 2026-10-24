@@ -1,6 +1,6 @@
 # Travers Group — traversgroupma.com
 
-Node/Express + EJS site. 118 pages: home, about, contact, 5 service pages, 18 town hubs, 90 service×town pages.
+Node/Express + EJS site. 124 pages: home, about, contact, 5 service pages, 6 demolition service pages, 18 town hubs, 90 service×town pages.
 
 ## Deploy (Railway)
 1. Railway → New Project → Deploy from GitHub repo → `ZacLamb/traversgroupma`. `npm start` is detected automatically.
@@ -11,6 +11,7 @@ Node/Express + EJS site. 118 pages: home, about, contact, 5 service pages, 18 to
 ## Editing
 - `data/business.js` — phone, email, address, GHL form ID
 - `data/services.js` — all service copy, FAQs, image IDs (add a service → pages, nav, footer and sitemap update)
+- `data/demolition.js` — the 6 demolition service pages (shed, garage, deck, light commercial, debris, site prep)
 - `data/towns.js` — towns, villages, local notes, nearby links (add a town → 6 new pages)
 - `data/compose.js` — the localized templates for service×town pages
 - `views/` — EJS templates; `public/css/site.css` — design system

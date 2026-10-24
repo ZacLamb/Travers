@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.css?v=1">
+<link rel="stylesheet" href="/css/site.css?v=3">
 <script type="application/ld+json"><%- JSON.stringify({
   '@context': 'https://schema.org',
   '@type': ['HomeAndConstructionBusiness', 'LocalBusiness'],
@@ -56,6 +56,12 @@
         <div class="menu">
           <% services.forEach(s => { %><a href="<%= svcUrl(s) %>"><%= s.navLabel %><span><%= s.cardLine %></span></a><% }) %>
           <hr><a href="/services">All services</a>
+        </div>
+      </li>
+      <li class="has-menu"><a href="/services/demolition">Demolition</a>
+        <div class="menu">
+          <% demoPages.forEach(d => { %><a href="<%= demoUrl(d) %>"><%= d.name %></a><% }) %>
+          <hr><a href="/services/demolition">All demolition services</a>
         </div>
       </li>
       <li class="has-menu"><a href="/service-areas">Service Areas</a>

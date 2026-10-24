@@ -14,6 +14,10 @@
         <ul><% services.forEach(s => { %><li><a href="<%= svcUrl(s) %>"><%= s.name %></a></li><% }) %></ul>
       </div>
       <div>
+        <h4>Demolition</h4>
+        <ul><% demoPages.forEach(d => { %><li><a href="<%= demoUrl(d) %>"><%= d.name %></a></li><% }) %></ul>
+      </div>
+      <div>
         <h4>Company</h4>
         <ul>
           <li><a href="/about">About Us</a></li>

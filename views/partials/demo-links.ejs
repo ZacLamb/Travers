@@ -1,0 +1,9 @@
+<div class="grid-3">
+  <% demoPages.filter(d => !(typeof exclude !== 'undefined' && d.slug === exclude)).forEach(d => { %>
+  <a class="card bordered card-link" href="<%= demoUrl(d) %>">
+    <h3><%= d.name %></h3>
+    <p><%= d.tagline %></p>
+    <span class="more chev">Learn more</span>
+  </a>
+  <% }) %>
+</div>

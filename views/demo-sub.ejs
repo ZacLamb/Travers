@@ -1,0 +1,77 @@
+<%- include('partials/head') %>
+<div class="subnav"><div class="wrap">
+  <strong><%= page.name %></strong>
+  <a class="link" href="<%= svcUrl(service) %>">All Demolition</a>
+  <a class="link" href="#areas">Areas</a>
+  <a class="link" href="#faq">FAQ</a>
+  <a class="btn btn-primary" href="/contact">Free estimate</a>
+</div></div>
+<main id="main">
+  <%- include('partials/crumbs') %>
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Demolition · Cape Cod & South Shore</span>
+      <h1 class="h1"><%= page.h1 %></h1>
+      <p class="lede"><%= page.tagline %></p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/contact">Get a free estimate</a>
+        <a class="btn btn-ghost" href="<%= biz.phoneHref %>">Call <%= biz.phone %></a>
+      </div>
+    </div>
+    <div class="page-hero-media"><img src="<%= img(page.img, 1800) %>" srcset="<%= srcset(page.img) %>" sizes="100vw" alt="<%= page.name %> by Travers Group on Cape Cod, MA" fetchpriority="high"></div>
+  </section>
+
+  <section class="section">
+    <div class="narrow prose reveal">
+      <% page.body.forEach((p, i) => { %><p><% if (i === 0) { %><strong><%= page.name %> from <%= biz.coverage %>.</strong> <% } %><%= p %></p><% }) %>
+    </div>
+    <div class="wrap mt-xl">
+      <div class="grid-4 reveal">
+        <% page.points.forEach((x, i) => { %><div class="card bordered"><span class="num">0<%= i + 1 %></span><h3><%= x %></h3></div><% }) %>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Why choose us</span><h2 class="h2">Demolition done carefully.</h2></div>
+      <ul class="spec-list mt-l reveal"><% service.why.forEach(w => { %><li><b><%= w.t %></b><span><%= w.d %></span></li><% }) %></ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Our work</span><h2 class="h2">Recent demolition projects.</h2></div>
+      <div class="mt-l reveal"><%- include('partials/gallery', { items: service.gallery.slice(0, 6), alt: page.name }) %></div>
+    </div>
+  </section>
+
+  <section class="section alt" id="faq">
+    <div class="narrow">
+      <div class="reveal"><span class="eyebrow">FAQ</span><h2 class="h2" style="margin-top:14px"><%= page.name %> questions.</h2></div>
+      <div class="mt-l reveal"><%- include('partials/faq', { faqs: page.faqs.concat(service.faqs.slice(1, 3)) }) %></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">More demolition</span><h2 class="h2">Other demolition services.</h2></div>
+      <div class="mt-l reveal"><%- include('partials/demo-links', { exclude: page.slug }) %></div>
+    </div>
+  </section>
+
+  <section class="section alt" id="areas">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Service areas</span><h2 class="h2">Demolition near you.</h2></div>
+      <div class="town-grid mt-l reveal"><% towns.forEach(t => { %><a href="<%= stUrl(service, t) %>">Demolition in <%= t.name %></a><% }) %></div>
+    </div>
+  </section>
+
+  <script type="application/ld+json"><%- JSON.stringify({
+    '@context': 'https://schema.org', '@type': 'Service', serviceType: page.name, name: page.title, description: page.meta,
+    url: SITE_URL + demoUrl(page), provider: { '@id': SITE_URL + '/#business' },
+    areaServed: towns.map(t => ({ '@type': 'City', name: t.name + ', MA' })), image: img(page.img, 1200),
+  }) %></script>
+  <%- include('partials/cta', { ctaTitle: 'Ready to clear the way?' }) %>
+</main>
+<%- include('partials/footer') %>
