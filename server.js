@@ -8,6 +8,7 @@ const towns = require('./data/towns');
 const demoPages = require('./data/demolition');
 const images = require('./data/images');
 const { serviceTown, townHub, list } = require('./data/compose');
+const { sendLead } = require('./lib/ghl');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,9 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.disable('x-powered-by');
 app.use(compression());
+app.set('trust proxy', 1);
+app.use(express.json({ limit: '20kb' }));
+app.use(express.urlencoded({ extended: false, limit: '20kb' }));
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: '7d' }));
 
 // Canonical host: strip www
@@ -112,10 +116,52 @@ app.get('/about', (req, res) => render(res, 'about', {
 }));
 
 app.get('/contact', (req, res) => render(res, 'contact', {
+  preService: services.some((s) => s.slug === req.query.service) ? req.query.service : '',
+  preTown: towns.some((t) => t.slug === req.query.town) ? req.query.town : '',
   title: 'Contact Travers Group | Free Estimates | (508) 888-9432',
   description: 'Request a free estimate for tree work, patios, retaining walls, demolition or firewood delivery. Call (508) 888-9432 or visit 152 Cranberry Highway, Bourne, MA.',
   breadcrumbs: [{ name: 'Contact', url: '/contact' }],
 }));
+
+// ---------- Leads -> GoHighLevel ----------
+const hits = new Map(); // simple per-IP limiter: 8 submissions / 15 min
+function limited(ip) {
+  const now = Date.now(), win = 15 * 60 * 1000;
+  const arr = (hits.get(ip) || []).filter((t) => now - t < win);
+  arr.push(now); hits.set(ip, arr);
+  if (hits.size > 5000) hits.clear();
+  return arr.length > 8;
+}
+const svcBySlug = Object.fromEntries(services.map((s) => [s.slug, s]));
+const townBySlug = Object.fromEntries(towns.map((t) => [t.slug, t]));
+app.post('/api/lead', async (req, res) => {
+  const b = req.body || {};
+  const wantsJson = (req.headers.accept || '').includes('application/json');
+  const done = () => (wantsJson ? res.json({ ok: true }) : res.redirect(303, '/contact?sent=1'));
+  const fail = (status, msg) => (wantsJson ? res.status(status).json({ ok: false, error: msg }) : res.status(status).send(msg));
+  if (b.company_website) return done(); // honeypot
+  if (limited(req.ip)) return fail(429, `Too many requests — please call ${biz.phone}.`);
+  const clean = (v, n = 200) => String(v || '').trim().slice(0, n);
+  const t = townBySlug[clean(b.town, 60)];
+  const lead = {
+    name: clean(b.name, 80), phone: clean(b.phone, 30), email: clean(b.email, 120),
+    address: clean(b.address, 160), zip: clean(b.zip, 10) || (t && t.zip) || '',
+    town: t ? t.name : clean(b.town, 60), service: clean(b.service, 60),
+    message: clean(b.message, 1500), page: clean(b.page, 300), contactPref: clean(b.contact_pref, 20),
+    urgent: b.urgent === 'yes' || b.urgent === true,
+  };
+  lead.serviceName = svcBySlug[lead.service] ? svcBySlug[lead.service].name : lead.service;
+  const digits = lead.phone.replace(/\D/g, '');
+  if (!lead.name || digits.length < 10) return fail(400, 'Please include your name and a 10-digit phone number.');
+  try {
+    await sendLead(lead);
+    console.log('lead ok', lead.service, lead.town);
+    return done();
+  } catch (e) {
+    console.error('LEAD FAILED', e.message, JSON.stringify(lead));
+    return fail(502, `Sorry — we could not submit that. Please call ${biz.phone}.`);
+  }
+});
 
 // ---------- Legacy GHL URL redirects (preserve rankings) ----------
 const legacy = {
@@ -128,7 +174,7 @@ Object.entries(legacy).forEach(([from, to]) => app.get(from, (req, res) => res.r
 
 // ---------- SEO ----------
 app.get('/robots.txt', (req, res) => {
-  res.type('text/plain').send(`User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
+  res.type('text/plain').send(`User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 });
 
 app.get('/sitemap.xml', (req, res) => {

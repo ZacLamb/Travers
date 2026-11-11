@@ -29,8 +29,44 @@
         </div>
       </div>
       <div class="form-shell">
-        <iframe src="https://api.leadconnectorhq.com/widget/form/<%= biz.ghlFormId %>" id="inline-<%= biz.ghlFormId %>" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-activation-type="alwaysActivated" data-deactivation-type="neverDeactivate" data-form-name="Contact Us" data-form-id="<%= biz.ghlFormId %>" title="Request a free estimate"></iframe>
-        <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
+        <form class="leadform" id="estimate" method="post" action="/api/lead" novalidate>
+          <h2 class="leadform__title">Request a free estimate</h2>
+          <p class="leadform__sub">We’ll call you back to set up a time to walk the property.</p>
+          <input type="hidden" name="page" value="/contact">
+          <div class="hp" aria-hidden="true"><label>Website <input name="company_website" tabindex="-1" autocomplete="off"></label></div>
+          <div class="fld-row">
+            <label class="fld"><span>Name</span><input name="name" autocomplete="name" required></label>
+            <label class="fld"><span>Phone</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+          </div>
+          <label class="fld"><span>Email <em>(optional)</em></span><input name="email" type="email" autocomplete="email"></label>
+          <label class="fld"><span>Project address <em>(optional)</em></span><input name="address" autocomplete="street-address"></label>
+          <div class="fld-row">
+            <label class="fld"><span>Town</span>
+              <select name="town">
+                <option value="">Select your town</option>
+                <% towns.forEach(t => { %><option value="<%= t.slug %>" <%= preTown === t.slug ? 'selected' : '' %>><%= t.name %></option><% }) %>
+                <option value="Other">Other</option>
+              </select></label>
+            <label class="fld"><span>Service</span>
+              <select name="service">
+                <option value="">Not sure yet</option>
+                <% services.forEach(s => { %><option value="<%= s.slug %>" <%= preService === s.slug ? 'selected' : '' %>><%= s.name %></option><% }) %>
+              </select></label>
+          </div>
+          <label class="fld"><span>Tell us about the project</span><textarea name="message" rows="4"></textarea></label>
+          <div class="fld-row">
+            <label class="fld"><span>Best way to reach you</span>
+              <select name="contact_pref"><option>Call</option><option>Text</option><option>Email</option></select></label>
+            <label class="chk"><input type="checkbox" name="urgent" value="yes"> Storm damage / urgent</label>
+          </div>
+          <button class="btn btn-primary leadform__btn" type="submit">Get my free estimate</button>
+          <p class="leadform__msg" role="status" aria-live="polite"></p>
+          <p class="leadform__fine">By submitting you agree to be contacted by Travers Group about your request by phone, text or email. Msg &amp; data rates may apply. Reply STOP to opt out.</p>
+        </form>
+        <div class="leadform__done" hidden>
+          <h2 class="leadform__title">Thanks — we got it.</h2>
+          <p>We’ll be in touch shortly. Need us sooner? Call <a href="<%= biz.phoneHref %>"><%= biz.phone %></a>.</p>
+        </div>
       </div>
     </div>
   </section>

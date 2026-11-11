@@ -19,6 +19,33 @@
     els.forEach(function (el) { el.classList.add('in'); });
   }
 
+  // Estimate form -> /api/lead -> GoHighLevel
+  document.querySelectorAll('.leadform').forEach(function (f) {
+    var shell = f.parentNode, done = shell.querySelector('.leadform__done');
+    if (/[?&]sent=1/.test(location.search) && done) { f.hidden = true; done.hidden = false; }
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var msg = f.querySelector('.leadform__msg'), btn = f.querySelector('button[type=submit]');
+      msg.className = 'leadform__msg'; msg.textContent = '';
+      if (!f.querySelector('[name=name]').value.trim() || f.querySelector('[name=phone]').value.replace(/\D/g, '').length < 10) {
+        msg.textContent = 'Please enter your name and a 10-digit phone number.'; msg.classList.add('err'); return;
+      }
+      btn.disabled = true; btn.textContent = 'Sending…';
+      var data = {}; new FormData(f).forEach(function (v, k) { data[k] = v; });
+      fetch('/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (r) {
+          if (!r.ok || !r.j.ok) throw new Error(r.j.error || 'Error');
+          if (window.gtag) gtag('event', 'generate_lead', { service: data.service || 'unknown' });
+          f.hidden = true; if (done) { done.hidden = false; done.scrollIntoView({ block: 'center' }); }
+        })
+        .catch(function (err) {
+          msg.textContent = err.message || 'Something went wrong. Please call us.'; msg.classList.add('err');
+          btn.disabled = false; btn.textContent = 'Get my free estimate';
+        });
+    });
+  });
+
   // Lightbox
   var lb = document.getElementById('lightbox');
   if (!lb) return;

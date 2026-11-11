@@ -16,6 +16,6 @@ module.exports = {
   clients: '1,450+',
   facebook: 'https://www.facebook.com/travers.fraser/',
   yelp: 'https://www.yelp.com/biz/travers-landscape-construction-and-engineering-sagamore-beach',
-  // GoHighLevel form (same form the old site used — leads keep flowing into the sub-account)
+  // Old embedded GHL form ID (no longer used — /contact now posts to /api/lead via lib/ghl.js)
   ghlFormId: 'aHiDsyeAAUXRwP5esR6Q',
 };

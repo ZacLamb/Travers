@@ -17,7 +17,11 @@ Node/Express + EJS site. 126 pages: home, about, contact, 5 service pages, 8 dem
 - `views/` — EJS templates; `public/css/site.css` — design system
 
 ## Leads
-`/contact` embeds the existing GHL form (`aHiDsyeAAUXRwP5esR6Q`), so submissions keep landing in the same sub-account.
+`/contact` has a native estimate form that posts to `POST /api/lead` (lib/ghl.js), which upserts the contact into the GHL sub-account.
+
+**Railway variables:** `GHL_API` (Private Integration token — scopes contacts.write, contacts.readonly, locations/customFields.readonly + .write) and `LOCATION_ID` (sub-account ID).
+
+Each lead gets tags `website lead`, `web service: <slug>`, `web town: <name>` (+ `urgent` if ticked), source `Website - traversgroupma.com`, standard fields (name, phone, email, address, town, ZIP, MA), contact custom fields **Website Service Requested, Website Message, Website Emergency, Website Service Area, Website Project Address, Website Contact Preference, Website Lead Page** (auto-created if missing), and a note with the full submission. `/contact?service=<slug>&town=<slug>` preselects the dropdowns.
 
 ## Images
 Photos are the client's existing GHL media, served via the LeadConnector image resizer. To self-host:
