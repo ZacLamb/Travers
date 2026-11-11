@@ -8,6 +8,52 @@
     document.body.style.overflow = open ? 'hidden' : '';
   });
 
+  // Header quick-contact dialog: preserve focus and close on Escape/backdrop.
+  var contactDialog = document.getElementById('header-contact-dialog');
+  if (contactDialog) {
+    var contactPanel = contactDialog.querySelector('.contact-modal__panel');
+    var lastContactTrigger = null;
+    var contactOpen = false;
+    function closeContact() {
+      if (!contactOpen) return;
+      contactOpen = false;
+      contactDialog.hidden = true;
+      contactDialog.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('contact-modal-open');
+      if (lastContactTrigger) lastContactTrigger.focus();
+    }
+    document.querySelectorAll('[data-open-contact]').forEach(function (trigger) {
+      trigger.addEventListener('click', function () {
+        lastContactTrigger = trigger;
+        if (nav && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          if (burger) burger.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        }
+        contactOpen = true;
+        contactDialog.hidden = false;
+        contactDialog.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('contact-modal-open');
+        var firstInput = contactDialog.querySelector('input[name=name]');
+        (firstInput || contactPanel).focus();
+      });
+    });
+    contactDialog.querySelectorAll('[data-close-contact]').forEach(function (btn) {
+      btn.addEventListener('click', closeContact);
+    });
+    document.addEventListener('keydown', function (event) {
+      if (!contactOpen) return;
+      if (event.key === 'Escape') { event.preventDefault(); closeContact(); return; }
+      if (event.key === 'Tab') {
+        var focusables = Array.prototype.slice.call(contactDialog.querySelectorAll('button:not([disabled]), input:not([disabled]):not([tabindex="-1"]), select:not([disabled]), textarea:not([disabled]), a[href]')).filter(function (el) { return el.getClientRects().length > 0; });
+        if (!focusables.length) return;
+        var first = focusables[0], last = focusables[focusables.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    });
+  }
+
   // Scroll reveal
   var els = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
@@ -22,7 +68,7 @@
   // Estimate form -> /api/lead -> GoHighLevel
   document.querySelectorAll('.leadform').forEach(function (f) {
     var shell = f.parentNode, done = shell.querySelector('.leadform__done');
-    if (/[?&]sent=1/.test(location.search) && done) { f.hidden = true; done.hidden = false; }
+    if (f.id === 'estimate' && /[?&]sent=1/.test(location.search) && done) { f.hidden = true; done.hidden = false; }
     f.addEventListener('submit', function (e) {
       e.preventDefault();
       var msg = f.querySelector('.leadform__msg'), btn = f.querySelector('button[type=submit]');

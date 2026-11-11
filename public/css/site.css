@@ -380,3 +380,34 @@ p { margin: 0; }
   .tile-copy { padding: 40px 22px 20px; }
   .tile-img { margin: 0 12px 12px; }
 }
+
+
+/* Header quick-contact dialog */
+.nav-links .nav-contact {
+  border: 0; background: none; padding: 0; color: var(--ink);
+  opacity: .85; font: inherit; font-size: 13px; cursor: pointer;
+}
+.nav-links .nav-contact:hover { opacity: 1; color: var(--accent); }
+.nav-links .nav-contact:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 3px; }
+.contact-modal[hidden] { display: none !important; }
+.contact-modal { position: fixed; inset: 0; z-index: 1100; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.contact-modal__backdrop { position: absolute; inset: 0; background: rgba(8, 10, 13, .74); backdrop-filter: blur(5px); }
+.contact-modal__panel { position: relative; width: min(100%, 570px); max-height: min(92dvh, 880px); overflow-y: auto; background: #fff; border-radius: 24px; padding: 32px; box-shadow: 0 28px 90px rgba(0,0,0,.25); }
+.contact-modal__close { position: absolute; right: 19px; top: 14px; border: 0; background: var(--bg-alt); color: var(--ink); width: 36px; height: 36px; border-radius: 50%; font-size: 27px; line-height: 1; cursor: pointer; }
+.contact-modal__close:hover { background: #e6e6e9; }
+.contact-modal__heading { padding-right: 30px; margin-bottom: 19px; }
+.contact-modal__heading .eyebrow { font-size: 11px; }
+.contact-modal__heading h2 { font-size: clamp(26px, 4vw, 34px); margin: 8px 0 9px; }
+.contact-modal__heading p { color: var(--ink-2); font-size: 14px; }
+.contact-modal .leadform .fld { margin-bottom: 12px; }
+.contact-modal .leadform input, .contact-modal .leadform select, .contact-modal .leadform textarea { padding: 10px 12px; }
+.contact-modal__done-close { margin-top: 20px; }
+body.contact-modal-open { overflow: hidden !important; }
+@media (max-width: 860px) {
+  .nav-links .nav-contact { display: block; width: 100%; text-align: left; font-size: 24px; font-weight: 600; padding: 14px 0; opacity: 1; letter-spacing: -.02em; }
+}
+@media (max-width: 600px) {
+  .contact-modal { padding: 10px; align-items: center; }
+  .contact-modal__panel { padding: 24px 18px; max-height: calc(100dvh - 20px); border-radius: 18px; }
+  .contact-modal .leadform .fld-row { grid-template-columns: 1fr; gap: 0; }
+}

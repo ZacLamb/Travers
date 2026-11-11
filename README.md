@@ -32,3 +32,7 @@ Photos are the client's existing GHL media, served via the LeadConnector image r
 
 ## Test
 `npm start` then `npm test` — crawls every internal link and checks redirects.
+
+
+### Header contact form
+The **Contact Us** button in the global header opens a mobile-friendly quick-contact form. It submits to the existing `/api/lead` endpoint and therefore uses the existing GoHighLevel integration. The original full Free Estimate contact page remains available.
