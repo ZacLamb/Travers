@@ -4,9 +4,9 @@ Node/Express + EJS site. 126 pages: home, about, contact, 5 service pages, 8 dem
 
 ## Deploy (Railway)
 1. Railway → New Project → Deploy from GitHub repo → `ZacLamb/traversgroupma`. `npm start` is detected automatically.
-2. Variables: `SITE_URL=https://traversgroupma.com` (used for canonicals, sitemap, schema).
-3. Settings → Networking → add custom domains `traversgroupma.com` and `www.traversgroupma.com` and point DNS at Railway (www 301s to apex).
-4. Submit `https://traversgroupma.com/sitemap.xml` in Google Search Console.
+2. Variables: `SITE_URL=https://www.traversgroupma.com` (used for canonicals, sitemap, schema).
+3. Settings → Networking → add custom domains `traversgroupma.com` and `www.traversgroupma.com` and point the `www` CNAME at Railway; use GoDaddy forwarding for the apex domain (apex 301s to www).
+4. Submit `https://www.traversgroupma.com/sitemap.xml` in Google Search Console.
 
 ## Editing
 - `data/business.js` — phone, email, address, GHL form ID

@@ -12,7 +12,7 @@ const { sendLead } = require('./lib/ghl');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const SITE_URL = (process.env.SITE_URL || 'https://traversgroupma.com').replace(/\/$/, '');
+const SITE_URL = (process.env.SITE_URL || 'https://www.traversgroupma.com').replace(/\/$/, '');
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -23,10 +23,12 @@ app.use(express.json({ limit: '20kb' }));
 app.use(express.urlencoded({ extended: false, limit: '20kb' }));
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: '7d' }));
 
-// Canonical host: strip www
+// Canonical host: use www. GoDaddy forwards the apex domain to this host.
+// Do not redirect www back to the apex: that would create a redirect loop.
 app.use((req, res, next) => {
-  const host = req.headers.host || '';
-  if (host.startsWith('www.')) return res.redirect(301, `${req.protocol}://${host.slice(4)}${req.originalUrl}`);
+  if (req.hostname.toLowerCase() === 'traversgroupma.com') {
+    return res.redirect(301, `https://www.traversgroupma.com${req.originalUrl}`);
+  }
   next();
 });
 
